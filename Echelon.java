@@ -31,29 +31,26 @@ public class Echelon {
     matrix.add(vector2);
     matrix.add(vector3);
 
-    matrix.vectors();
     leadingOne(matrix);
+    matrix.vectors();
 
     int vectorPos = 0;
     int columns = matrix.numCols();
 
     int[] vector = matrix.get(vectorPos);
 
-    // need to have already made first value of vector 1
-    for (int i = 1; i < vector.length; i++) {
-      if (vector[i] != 0) {
-        matrix.replace(vector[0], vector[i], -vector[i]);
-      }
+    while (vectorPos < columns ) {
+
+      // makes all values below the pivot position equal zero to begin to
+      // get into Echelon form
+      for (int i = vectorPos + 1; i < vector.length; i++) {
+        if (vector[i] != 0) {
+          matrix.replace(0, i, -vector[i]);
+        }
+      } vectorPos ++;
     }
 
     matrix.vectors();
-
-
-    // while (vectorPos < columns ) {
-    //
-    //
-    //   vectorPos ++;
-    // }
 
 
       // figure put by what factor to combine things to make zero
@@ -72,10 +69,10 @@ public class Echelon {
     // Matrix matrix = new Matrix(rows, cols);
 
     // int count = 0;
-    // while (count < rows) {
+    // while (count < rows) { // perform a "do while loop" ?
     //
     //   System.out.println(" \n Please write out your " + (count + 1)  + " vector with it's elements separated by a space.");
-    //   String line = in.next();
+    //   String line = in.next(); //.nextInt() reads in the next token as an int value/ if cannot be read as int, then will throw an exception
     //   String[] lineArray = line.split(" ");
     //
     //   //Assert
@@ -83,7 +80,7 @@ public class Echelon {
     //   int[] vector = new int[lineArray.length];
     //
     //   for (int i = 0; i < lineArray.length; i++) {
-    //     vector[i] = Integer.parseInt(lineArray[i]);
+    //     vector[i] = Integer.valueOf(lineArray[i]);
     //   }
     //   for (int i: vector) {
     //     System.out.println(i);
