@@ -13,27 +13,24 @@ import java.util.Arrays;
 import structure5.*;
 // package commonly used in my data structures course
 
-
-
 public class Matrix {
 
-  int vectorLength;
-  Vector<int[]> matrix;
+  protected int vectorLength;
+  protected Vector<float[]> matrix;
 
 
   public Matrix(int vectorLength, int size) {
     //constructs 'matrix' with the vector class provided by structure5.*
 
-    matrix = new Vector<int[]>(size);
+    matrix = new Vector<float[]>(size);
     this.vectorLength = vectorLength;
   }
 
-  public void add(int[] v) {
+  public void add(float[] v) {
     /*
     * Adds a new 'vector' to the 'matrix'
     * Utilizes the Assert object provided by the structure5 class
     */
-
     Assert.pre(v.length == vectorLength, "Invalid vector length for matrix of " + vectorLength + " space.");
 
     matrix.add(v);
@@ -57,13 +54,13 @@ public class Matrix {
     matrix.remove(i);
   }
 
-  public int[] get(int location) {
+  public float[] get(int location) {
     // returns the vector at a specified location of the matrix
 
     return matrix.get(location);
   }
 
-  public void set(int location, int[] v) {
+  public void set(int location, float[] v) {
     //sets the vector at a location in the matrix
 
     matrix.set(location, v);
@@ -73,7 +70,7 @@ public class Matrix {
       //swaps row 1 with row 2 (elementary row opereation)
 
     for (int i = 0; i < matrix.size(); i++) {
-      int temp = matrix.get(i)[row1];
+      float temp = matrix.get(i)[row1];
       matrix.get(i)[row1] = matrix.get(i)[row2];
       matrix.get(i)[row2] = temp;
     }
@@ -90,7 +87,7 @@ public class Matrix {
   }
 
 
-  public void replace(int row1, int row2, int scalar) {
+  public void replace(int row1, int row2, float scalar) {
     //replaces row2 by the sum of itself an a multiple of row1
 
     for (int i = 0; i < matrix.size(); i++) {
@@ -98,13 +95,26 @@ public class Matrix {
     }
   }
 
+  public void leadingOne(int row) {
+    /*
+    * Pre: pass an int of the row you want with a leading 1
+    * Post: row reduces to produce a leading 1 in specified row
+    */
+
+      float diagonal = matrix.get(row)[row];
+
+      for (int i = row; i < numCols(); i++) {
+        matrix.get(i)[row] /= diagonal;
+      }
+  }
+
 
   public void vectors() {
       //prints matrix in a intelligible format seen in linear algebra
 
-    for (int i = 0; i < matrix.size(); i++) {
-      Vector<Integer> display = new Vector<Integer>(matrix.size());
-      for (int e = 0; e <matrix.size(); e++) {
+    for (int i = 0; i < numRows(); i++) {
+      Vector<Float> display = new Vector<Float>(matrix.size());
+      for (int e = 0; e < numCols(); e++) {
         display.add(matrix.get(e)[i]);
       }
       System.out.println(display.toString());
@@ -116,19 +126,26 @@ public class Matrix {
     // testing the matrix methods and row operations
     Matrix matrix = new Matrix(3,3);
 
-    int[] vector1 = {1,2,3};
-    int[] vector2 = {4,5,6};
-    int[] vector3 = {7,8,9};
+    float[] vector1 = {1,2,3};
+    float[] vector2 = {6,5,6};
+    float[] vector3 = {9,8,9};
 
     matrix.add(vector1);
     matrix.add(vector2);
     matrix.add(vector3);
 
-    matrix.interchange(0, 1);
-    matrix.scale(1, -1);
-    matrix.replace(1,2,-1);
+    // matrix.interchange(0, 1);
+    // matrix.scale(1, -1);
+    // matrix.replace(1,2,-1);
+
+    System.out.println("\n");
+    matrix.vectors();
+    System.out.println("\n");
+
+    matrix.leadingOne(0);
 
     matrix.vectors();
+    System.out.println("\n");
 
   }
 }

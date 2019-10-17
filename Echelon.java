@@ -2,55 +2,52 @@ import java.util.Scanner;
 
 public class Echelon {
 
-  //Realized that this method is obsolete
-  public static void leadingOne(Matrix matrix) {
-
-    //checks if first row already begins with 1
-    if (matrix.get(0)[0] == 1) return;
-
-    //trys to find a row that begins with 1 and swaps it
-    for (int i = 1; i < matrix.get(0).length; i++ ) {
-      if (matrix.get(0)[i] == 1){
-        matrix.interchange(0, i);
-        break;
-      }
-    } return;
-  }
-
   public static void main(String[] args) {
 
     Scanner in = new Scanner(System.in);
 
-    Matrix matrix = new Matrix(3, 3);
+    Matrix matrix = new Matrix(4, 6);
 
-    int[] vector1 = {2,1,3};
-    int[] vector2 = {4,5,6};
-    int[] vector3 = {7,8,9};
+    float[] vector1 = {3,2,3,5};
+    float[] vector2 = {4,5,6,3};
+    float[] vector3 = {7,8,9,2};
+    float[] vector4 = {1,4,9,2};
+    float[] vector5 = {3,6,3,5};
+    float[] vector6 = {7,8,8,4};
 
     matrix.add(vector1);
     matrix.add(vector2);
     matrix.add(vector3);
+    matrix.add(vector4);
+    matrix.add(vector5);
+    matrix.add(vector6);
 
-    leadingOne(matrix);
+
+    System.out.println("\n");
     matrix.vectors();
+    System.out.println("\n");
 
+
+    // creates upper triangular matrix for some cases
+    // still working out the kinks
     int vectorPos = 0;
     int columns = matrix.numCols();
-
-    int[] vector = matrix.get(vectorPos);
-
     while (vectorPos < columns ) {
 
-      // makes all values below the pivot position equal zero to begin to
-      // get into Echelon form
-      for (int i = vectorPos + 1; i < vector.length; i++) {
+      matrix.leadingOne(vectorPos);
+      float[] vector = matrix.get(vectorPos);
+
+
+      for (int i = vectorPos + 1; i < matrix.numRows(); i++) {
         if (vector[i] != 0) {
-          matrix.replace(0, i, -vector[i]);
+          matrix.replace(vectorPos, i, -vector[i]);
         }
       } vectorPos ++;
     }
 
     matrix.vectors();
+    System.out.println("\n");
+
 
 
       // figure put by what factor to combine things to make zero
