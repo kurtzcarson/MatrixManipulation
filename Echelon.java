@@ -6,11 +6,11 @@ public class Echelon {
 
     Scanner in = new Scanner(System.in);
 
-    Matrix matrix = new Matrix(4, 6);
+    Matrix matrix = new Matrix(4, 5);
 
-    float[] vector1 = {3,2,3,5};
-    float[] vector2 = {4,5,6,3};
-    float[] vector3 = {7,8,9,2};
+    float[] vector1 = {3,2,3,8};
+    float[] vector2 = {4,5,6,2};
+    float[] vector3 = {7,8,9,6};
     float[] vector4 = {1,4,9,2};
     float[] vector5 = {3,6,3,5};
     float[] vector6 = {7,8,8,4};
@@ -27,16 +27,14 @@ public class Echelon {
     matrix.vectors();
     System.out.println("\n");
 
-
-    // creates upper triangular matrix for some cases
-    // still working out the kinks
+    /* creates an upper triangular matrix by row reduction functionality
+    implemented in the Matrix class */
     int vectorPos = 0;
     int columns = matrix.numCols();
     while (vectorPos < columns ) {
 
       matrix.leadingOne(vectorPos);
-      float[] vector = matrix.get(vectorPos);
-
+      float[] vector = matrix.getCol(vectorPos);
 
       for (int i = vectorPos + 1; i < matrix.numRows(); i++) {
         if (vector[i] != 0) {
@@ -48,14 +46,7 @@ public class Echelon {
     matrix.vectors();
     System.out.println("\n");
 
-
-
-      // figure put by what factor to combine things to make zero
-      //then performing replace with rows and scalar (remember row2 is the
-      // one being replaced )
-
-    //   rows --;
-    // }
+    //******WILL BE DESIGNED FOR USER INPUT*******
 
     // System.out.print("\n Please enter the length of your vector (i.e the space it lies in)   ");
     // int rows = in.nextInt();

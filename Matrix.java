@@ -13,7 +13,7 @@ import java.util.Arrays;
 import structure5.*;
 // package commonly used in my data structures course
 
-public class Matrix {
+public class Matrix implements MatrixInterface {
 
   protected int vectorLength;
   protected Vector<float[]> matrix;
@@ -32,7 +32,6 @@ public class Matrix {
     * Utilizes the Assert object provided by the structure5 class
     */
     Assert.pre(v.length == vectorLength, "Invalid vector length for matrix of " + vectorLength + " space.");
-
     matrix.add(v);
   }
 
@@ -54,13 +53,13 @@ public class Matrix {
     matrix.remove(i);
   }
 
-  public float[] get(int location) {
+  public float[] getCol(int location) {
     // returns the vector at a specified location of the matrix
 
     return matrix.get(location);
   }
 
-  public void set(int location, float[] v) {
+  public void setCol(int location, float[] v) {
     //sets the vector at a location in the matrix
 
     matrix.set(location, v);
@@ -74,9 +73,7 @@ public class Matrix {
       matrix.get(i)[row1] = matrix.get(i)[row2];
       matrix.get(i)[row2] = temp;
     }
-
   }
-
 
   public void scale(int row, int scalar) {
     //scales a particular row by a scalar (elementary row operation)
@@ -100,11 +97,14 @@ public class Matrix {
     * Pre: pass an int of the row you want with a leading 1
     * Post: row reduces to produce a leading 1 in specified row
     */
+      if (row < numRows()) {
 
-      float diagonal = matrix.get(row)[row];
+        float diagonal = matrix.get(row)[row];
 
-      for (int i = row; i < numCols(); i++) {
-        matrix.get(i)[row] /= diagonal;
+        for (int i = row; i < numCols(); i++) {
+          matrix.get(i)[row] /= diagonal;
+          matrix.get(i)[row] = Helper.round(matrix.get(i)[row]);
+        }
       }
   }
 
