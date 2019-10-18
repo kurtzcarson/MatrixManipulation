@@ -108,7 +108,6 @@ public class Matrix implements MatrixInterface {
       }
   }
 
-
   public void vectors() {
       //prints matrix in a intelligible format seen in linear algebra
 
@@ -121,31 +120,4 @@ public class Matrix implements MatrixInterface {
     }
   }
 
-  public static void main(String[] args) {
-
-    // testing the matrix methods and row operations
-    Matrix matrix = new Matrix(3,3);
-
-    float[] vector1 = {1,2,3};
-    float[] vector2 = {6,5,6};
-    float[] vector3 = {9,8,9};
-
-    matrix.add(vector1);
-    matrix.add(vector2);
-    matrix.add(vector3);
-
-    // matrix.interchange(0, 1);
-    // matrix.scale(1, -1);
-    // matrix.replace(1,2,-1);
-
-    System.out.println("\n");
-    matrix.vectors();
-    System.out.println("\n");
-
-    matrix.leadingOne(0);
-
-    matrix.vectors();
-    System.out.println("\n");
-
-  }
 }
