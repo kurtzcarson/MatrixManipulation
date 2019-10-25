@@ -8,10 +8,4 @@ public class Helper {
     float result = Math.round(num * 100);
     return result/100;
   }
-
-  public static void main(String[] args) {
-
-    // System.out.println(round(4.3267f));
-
-  }
 }

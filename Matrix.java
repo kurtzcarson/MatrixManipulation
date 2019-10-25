@@ -108,6 +108,23 @@ public class Matrix implements MatrixInterface {
       }
   }
 
+  //checks to see if first vector in matrix has a leading zero and swaps rows if it does
+  public void leadingZero() {
+
+    float[] firstVector = matrix.get(0);
+
+    if (firstVector[0] == 0) {
+
+      //traverses elements of the first vector
+      for (int i = 1; i < firstVector.length; i++) {
+        if (firstVector[i] != 0) {
+          interchange(0, i);
+          return;
+        }
+      }
+    }
+  }
+
   public void vectors() {
       //prints matrix in a intelligible format seen in linear algebra
 
