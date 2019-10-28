@@ -47,10 +47,20 @@ public class Matrix implements MatrixInterface {
     return matrix.size();
   }
 
-  public void remove(int i) {
+  public void removeCol(int col) {
     //removes the specified vector based on index from the matrix
 
-    matrix.remove(i);
+    matrix.remove(col);
+  }
+
+  public void removeRow(int row) {
+
+    for (int col = 0; col < matrix.size(); col++) {
+
+      List<String> temp = Arrays.asList(matrix.get(col));
+      temp.remove(row);
+
+    }
   }
 
   public float[] getCol(int location) {
