@@ -11,6 +11,7 @@
 
 import java.util.Arrays;
 import structure5.*;
+import java.lang.Math;
 // package commonly used in my data structures course
 
 public class Matrix implements MatrixInterface {
@@ -26,7 +27,7 @@ public class Matrix implements MatrixInterface {
     this.vectorLength = vectorLength;
   }
 
-  public void add(float[] v) {
+  public void addCol(float[] v) {
     /*
     * Adds a new 'vector' to the 'matrix'
     * Utilizes the Assert object provided by the structure5 class
@@ -53,15 +54,15 @@ public class Matrix implements MatrixInterface {
     matrix.remove(col);
   }
 
-  public void removeRow(int row) {
-
-    for (int col = 0; col < matrix.size(); col++) {
-
-      List<String> temp = Arrays.asList(matrix.get(col));
-      temp.remove(row);
-
-    }
-  }
+  // public void removeRow(int row) {
+  //
+  //   for (int col = 0; col < matrix.size(); col++) {
+  //
+  //     List<String> temp = Arrays.asList(matrix.get(col));
+  //     temp.remove(row);
+  //
+  //   }
+  // }
 
   public float[] getCol(int location) {
     // returns the vector at a specified location of the matrix
@@ -113,7 +114,7 @@ public class Matrix implements MatrixInterface {
 
         for (int i = row; i < numCols(); i++) {
           matrix.get(i)[row] /= diagonal;
-          matrix.get(i)[row] = Helper.round(matrix.get(i)[row]);
+          matrix.get(i)[row] = round(matrix.get(i)[row]);
         }
       }
   }
@@ -145,6 +146,13 @@ public class Matrix implements MatrixInterface {
       }
       System.out.println(display.toString());
     }
+  }
+
+  public static float round(float num) {
+    //round floats to the hundredth place
+
+    float result = Math.round(num * 100);
+    return result/100;
   }
 
 }

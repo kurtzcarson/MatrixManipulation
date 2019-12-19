@@ -7,13 +7,13 @@
 
 public interface MatrixInterface {
 
-  public void add(float[] v);
+  public void addCol(float[] v);
 
   public int numRows();
 
   public int numCols();
 
-  public void remove(int i);
+  public void removeCol(int i);
 
   public float[] getCol(int location);
 

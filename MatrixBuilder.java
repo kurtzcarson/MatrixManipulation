@@ -29,7 +29,7 @@ public class MatrixBuilder {
           i++;
         }
       }
-      matrix.add(vector);
+      matrix.addCol(vector);
       count ++;
     }
 
